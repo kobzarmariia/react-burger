@@ -19,7 +19,7 @@ const purchaseBurgerSuccess = (state, { orderData, orderId }) => {
 		...state,
 		loading: false,
 		purchased: true,
-		orders: state.orders.concat(newOrder),
+		orders: [...state.orders, newOrder],
 	};
 };
 
