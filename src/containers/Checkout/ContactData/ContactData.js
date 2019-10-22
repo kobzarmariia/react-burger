@@ -7,7 +7,7 @@ import './ContactData.css';
 import axios from '../../../axios-orders';
 import Input from '../../../components/UI/Input/Input';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
-import * as actions from '../../../store/actions';
+import * as actions from '../../../actions';
 import { checkValidity } from '../../../shared/utitlity';
 
 class ContactData extends Component {

@@ -1,5 +1,4 @@
-import * as actionTypes from '../../store/actions/actionTypes';
-import { updateObject } from '../../store/utility';
+import * as actionTypes from './actionTypes';
 
 const initialState = {
 	token: null,
@@ -10,31 +9,44 @@ const initialState = {
 };
 
 const authStart = (state = initialState, action) => {
-	return updateObject(state, { error: null, loading: true });
+	return {
+		...state,
+		error: null,
+		loading: true,
+	};
 };
 
 const authSuccess = (state, { idToken, userId }) => {
-	return updateObject(state, {
+	return {
+		...state,
 		token: idToken,
 		userId: userId,
 		error: null,
 		loading: false,
-	});
+	};
 };
 
 const authFail = (state, { error }) => {
-	return updateObject(state, {
+	return {
+		...state,
 		error: error,
 		loading: false,
-	});
+	};
 };
 
 const authLogout = (state, action) => {
-	return updateObject(state, { token: null, userId: null });
+	return {
+		...state,
+		token: null,
+		userId: null,
+	};
 };
 
 const setAuthRedirectPath = (state, { path }) => {
-	return updateObject(state, { authRedirectPath: path });
+	return {
+		...state,
+		authRedirectPath: path,
+	};
 };
 
 const reducer = (state = initialState, action) => {
