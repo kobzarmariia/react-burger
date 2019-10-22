@@ -1,4 +1,4 @@
-import * as actionTypes from './actionTypes';
+import * as actionTypes from '../../store/actions/actionTypes';
 import axios from 'axios';
 
 export const authStart = () => {
@@ -53,20 +53,22 @@ export const auth = (email, password, isSignup) => {
 			url =
 				'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAnhOrxFH3cSTA9wKnyAuf-g6KxLEzR940';
 		}
-		axios
-			.post(url, authData)
-			.then(response => {
-				const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
-				localStorage.setItem('token', response.data.idToken);
-				localStorage.setItem('expirationDate', expirationDate);
-				localStorage.setItem('userId', response.data.localId);
-				dispatch(authSuccess(response.data.idToken, response.data.localId));
-				dispatch(checkAuthTimeout(response.data.expiresIn));
-			})
-			.catch(err => {
-				dispatch(authFail(err.response.data.error));
-			});
+		postAuth(dispatch, url, authData);
 	};
+};
+
+const postAuth = async (dispatch, url, authData) => {
+	try {
+		const response = await axios.post(url, authData);
+		const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
+		localStorage.setItem('token', response.data.idToken);
+		localStorage.setItem('expirationDate', expirationDate);
+		localStorage.setItem('userId', response.data.localId);
+		dispatch(authSuccess(response.data.idToken, response.data.localId));
+		dispatch(checkAuthTimeout(response.data.expiresIn));
+	} catch (err) {
+		dispatch(authFail(err.response.data.error));
+	}
 };
 
 export const setAuthRedirectPath = path => {
