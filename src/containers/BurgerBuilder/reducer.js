@@ -53,13 +53,6 @@ const setIngredients = (state, { ingredients: { salad, bacon, cheese, meat } }) 
 	};
 };
 
-const fetchIngredientsFailed = (state, action) => {
-	return {
-		...state,
-		error: true,
-	};
-};
-
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case actionTypes.ADD_INGREDIENT:
@@ -69,7 +62,10 @@ const reducer = (state = initialState, action) => {
 		case actionTypes.SET_INGREDIENTS:
 			return setIngredients(state, action);
 		case actionTypes.FETCH_INGREDIENTS_FAILED:
-			return fetchIngredientsFailed(state, action);
+			return {
+				...state,
+				error: true,
+			};
 		default:
 			return state;
 	}
