@@ -92,24 +92,20 @@ const BurgerBuilder = props => {
 	);
 };
 
-const mapStateToProps = state => {
-	return {
-		ings: state.burgerBuilder.ingredients,
-		price: state.burgerBuilder.totalPrice,
-		error: state.burgerBuilder.error,
-		isAuthenticated: state.auth.token !== null,
-	};
-};
+const mapStateToProps = state => ({
+	ings: state.burgerBuilder.ingredients,
+	price: state.burgerBuilder.totalPrice,
+	error: state.burgerBuilder.error,
+	isAuthenticated: state.auth.token !== null,
+});
 
-const mapDispatchToProps = dispatch => {
-	return {
-		onIngredientAdded: ingName => dispatch(addIngredient(ingName)),
-		onIngredientRemoved: ingName => dispatch(removeIngredient(ingName)),
-		onInitIngregients: () => dispatch(initIngredients()),
-		onInitPurchase: () => dispatch(purchaseInit()),
-		onSetAuthRedirectPath: path => dispatch(setAuthRedirectPath(path)),
-	};
-};
+const mapDispatchToProps = dispatch => ({
+	onIngredientAdded: ingName => dispatch(addIngredient(ingName)),
+	onIngredientRemoved: ingName => dispatch(removeIngredient(ingName)),
+	onInitIngregients: () => dispatch(initIngredients()),
+	onInitPurchase: () => dispatch(purchaseInit()),
+	onSetAuthRedirectPath: path => dispatch(setAuthRedirectPath(path)),
+});
 
 export default connect(
 	mapStateToProps,

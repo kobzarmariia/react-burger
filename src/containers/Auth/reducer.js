@@ -1,4 +1,10 @@
-import * as actionTypes from './actionTypes';
+import {
+	AUTH_START,
+	AUTH_SUCCESS,
+	AUTH_FAIL,
+	AUTH_LOGOUT,
+	SET_AUTH_REDIRECT_PATH,
+} from './actionTypes';
 
 const initialState = {
 	token: null,
@@ -10,13 +16,13 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
-		case actionTypes.AUTH_START:
+		case AUTH_START:
 			return {
 				...state,
 				error: null,
 				loading: true,
 			};
-		case actionTypes.AUTH_SUCCESS:
+		case AUTH_SUCCESS:
 			return {
 				...state,
 				token: action.idToken,
@@ -24,19 +30,19 @@ const reducer = (state = initialState, action) => {
 				error: null,
 				loading: false,
 			};
-		case actionTypes.AUTH_FAIL:
+		case AUTH_FAIL:
 			return {
 				...state,
 				error: action.error,
 				loading: false,
 			};
-		case actionTypes.AUTH_LOGOUT:
+		case AUTH_LOGOUT:
 			return {
 				...state,
 				token: null,
 				userId: null,
 			};
-		case actionTypes.SET_AUTH_REDIRECT_PATH:
+		case SET_AUTH_REDIRECT_PATH:
 			return {
 				...state,
 				authRedirectPath: action.path,

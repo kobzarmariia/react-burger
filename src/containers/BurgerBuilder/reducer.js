@@ -1,4 +1,9 @@
-import * as actionTypes from './actionTypes';
+import {
+	ADD_INGREDIENT,
+	REMOVE_INGREDIENT,
+	SET_INGREDIENTS,
+	FETCH_INGREDIENTS_FAILED,
+} from './actionTypes';
 
 const initialState = {
 	ingredients: null,
@@ -55,13 +60,13 @@ const setIngredients = (state, { ingredients: { salad, bacon, cheese, meat } }) 
 
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
-		case actionTypes.ADD_INGREDIENT:
+		case ADD_INGREDIENT:
 			return addIngredient(state, action);
-		case actionTypes.REMOVE_INGREDIENT:
+		case REMOVE_INGREDIENT:
 			return removeIngredient(state, action);
-		case actionTypes.SET_INGREDIENTS:
+		case SET_INGREDIENTS:
 			return setIngredients(state, action);
-		case actionTypes.FETCH_INGREDIENTS_FAILED:
+		case FETCH_INGREDIENTS_FAILED:
 			return {
 				...state,
 				error: true,

@@ -55,17 +55,13 @@ const App = props => {
 	);
 };
 
-const mapStateToProps = state => {
-	return {
-		isAuthenticated: state.auth.token !== null,
-	};
-};
+const mapStateToProps = state => ({
+	isAuthenticated: state.auth.token !== null,
+});
 
-const mapDispatchToProps = dispatch => {
-	return {
-		onTryAutoSignUp: () => dispatch(authCheckState()),
-	};
-};
+const mapDispatchToProps = dispatch => ({
+	onTryAutoSignUp: () => dispatch(authCheckState()),
+});
 
 export default withRouter(
 	connect(
