@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import Order from '../../components/Order/Order';
 import axios from '../../axios-orders';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
-import * as actions from '../../actions';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import { fetchOrders } from './actions';
 
 const Orders = props => {
 	useEffect(() => {
@@ -33,7 +33,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		onFetchOrders: (token, userId) => dispatch(actions.fetchOrders(token, userId)),
+		onFetchOrders: (token, userId) => dispatch(fetchOrders(token, userId)),
 	};
 };
 

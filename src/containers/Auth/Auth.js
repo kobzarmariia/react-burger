@@ -6,7 +6,7 @@ import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import './Auth.css';
-import * as actions from '../../actions';
+import { auth, setAuthRedirectPath } from './actions';
 import { checkValidity } from '../../shared/utitlity';
 
 const Auth = props => {
@@ -134,8 +134,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup)),
-		onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/')),
+		onAuth: (email, password, isSignup) => dispatch(auth(email, password, isSignup)),
+		onSetAuthRedirectPath: () => dispatch(setAuthRedirectPath('/')),
 	};
 };
 

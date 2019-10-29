@@ -8,7 +8,9 @@ import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import axios from '../../axios-orders';
-import * as actions from '../../actions';
+import { addIngredient, removeIngredient, initIngredients } from './actions';
+import { purchaseInit } from '../Orders/actions';
+import { setAuthRedirectPath } from '../Auth/actions';
 
 const BurgerBuilder = props => {
 	const [purchasing, setPurchasing] = useState(false);
@@ -101,11 +103,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		onIngredientAdded: ingName => dispatch(actions.addIngredient(ingName)),
-		onIngredientRemoved: ingName => dispatch(actions.removeIngredient(ingName)),
-		onInitIngregients: () => dispatch(actions.initIngredients()),
-		onInitPurchase: () => dispatch(actions.purchaseInit()),
-		onSetAuthRedirectPath: path => dispatch(actions.setAuthRedirectPath(path)),
+		onIngredientAdded: ingName => dispatch(addIngredient(ingName)),
+		onIngredientRemoved: ingName => dispatch(removeIngredient(ingName)),
+		onInitIngregients: () => dispatch(initIngredients()),
+		onInitPurchase: () => dispatch(purchaseInit()),
+		onSetAuthRedirectPath: path => dispatch(setAuthRedirectPath(path)),
 	};
 };
 
