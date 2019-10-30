@@ -3,10 +3,10 @@ import './BurgerIngredient.css';
 
 import PropTypes from 'prop-types';
 
-const BurgerIngredient = props => {
+const BurgerIngredient = ({ type }) => {
 	let ingredient = null;
 
-	switch (props.type) {
+	switch (type) {
 		case 'bread-bottom':
 			ingredient = <div className="BreadBottom"></div>;
 			break;

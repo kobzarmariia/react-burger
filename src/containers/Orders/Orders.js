@@ -7,26 +7,26 @@ import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import { fetchOrders } from './actions';
 
-const Orders = props => {
+const Orders = ({ orders, loading, onFetchOrders, token, userId }) => {
 	useEffect(() => {
-		props.onFetchOrders(props.token, props.userId);
+		onFetchOrders(token, userId);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	let orders = <Spinner />;
-	if (!props.loading) {
-		orders = props.orders.map(order => (
+	let receivedOrders = <Spinner />;
+	if (!loading) {
+		receivedOrders = orders.map(order => (
 			<Order key={order.id} ingredients={order.ingredients} price={order.price} />
 		));
 	}
-	return <div>{orders}</div>;
+	return <div>{receivedOrders}</div>;
 };
 
-const mapStateToProps = state => ({
-	orders: state.order.orders,
-	loading: state.order.loading,
-	token: state.auth.token,
-	userId: state.auth.userId,
+const mapStateToProps = ({ order, auth }) => ({
+	orders: order.orders,
+	loading: order.loading,
+	token: auth.token,
+	userId: auth.userId,
 });
 
 const mapDispatchToProps = dispatch => ({

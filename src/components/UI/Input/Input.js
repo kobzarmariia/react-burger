@@ -2,22 +2,31 @@ import React from 'react';
 
 import './Input.css';
 
-const input = props => {
+const input = ({
+	invalid,
+	shouldValidate,
+	touched,
+	elementType,
+	elementConfig,
+	value,
+	changed,
+	label,
+}) => {
 	let inputElement = null;
 	const inputClasses = ['InputElement'];
 
-	if (props.invalid && props.shouldValidate && props.touched) {
+	if (invalid && shouldValidate && touched) {
 		inputClasses.push('Invalid');
 	}
 
-	switch (props.elementType) {
+	switch (elementType) {
 		case 'input':
 			inputElement = (
 				<input
 					className={inputClasses.join(' ')}
-					{...props.elementConfig}
-					value={props.value}
-					onChange={props.changed}
+					{...elementConfig}
+					value={value}
+					onChange={changed}
 				/>
 			);
 			break;
@@ -25,16 +34,16 @@ const input = props => {
 			inputElement = (
 				<textarea
 					className={inputClasses.join(' ')}
-					{...props.elementConfig}
-					value={props.value}
-					onChange={props.changed}
+					{...elementConfig}
+					value={value}
+					onChange={changed}
 				/>
 			);
 			break;
 		case 'select':
 			inputElement = (
-				<select className={inputClasses.join(' ')} value={props.value} onChange={props.changed}>
-					{props.elementConfig.options.map(option => (
+				<select className={inputClasses.join(' ')} value={value} onChange={changed}>
+					{elementConfig.options.map(option => (
 						<option key={option.value} value={option.value}>
 							{option.displayValue}
 						</option>
@@ -46,16 +55,16 @@ const input = props => {
 			inputElement = (
 				<input
 					className={inputClasses.join(' ')}
-					{...props.elementConfig}
-					value={props.value}
-					onChange={props.changed}
+					{...elementConfig}
+					value={value}
+					onChange={changed}
 				/>
 			);
 	}
 
 	return (
 		<div className={'Input'}>
-			<label className={'Label'}>{props.label}</label>
+			<label className={'Label'}>{label}</label>
 			{inputElement}
 		</div>
 	);

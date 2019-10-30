@@ -6,18 +6,18 @@ import Logo from '../../Logo/Logo';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import Backdrop from '../../UI/Backdrop/Backdrop';
 
-const sideDraw = props => {
+const sideDraw = ({ open, closed, isAuth }) => {
 	let attachedClasses = ['SideDrawer', 'Close'];
-	if (props.open) {
+	if (open) {
 		attachedClasses = ['SideDrawer', 'Open'];
 	}
 	return (
 		<>
-			<Backdrop show={props.open} clicked={props.closed} />
-			<div className={attachedClasses.join(' ')} onClick={props.closed}>
+			<Backdrop show={open} clicked={closed} />
+			<div className={attachedClasses.join(' ')} onClick={closed}>
 				<Logo height="11%" />
 				<nav>
-					<NavigationItems isAuthenticated={props.isAuth} />
+					<NavigationItems isAuthenticated={isAuth} />
 				</nav>
 			</div>
 		</>

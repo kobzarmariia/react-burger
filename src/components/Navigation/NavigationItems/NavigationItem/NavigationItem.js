@@ -3,10 +3,10 @@ import { NavLink } from 'react-router-dom';
 
 import './NavigationItem.css';
 
-const navigationItem = props => (
+const navigationItem = ({ link, children }) => (
 	<li className="NavigationItem">
-		<NavLink to={props.link} exact activeClassName="active">
-			{props.children}
+		<NavLink to={link} exact activeClassName="active">
+			{children}
 		</NavLink>
 	</li>
 );

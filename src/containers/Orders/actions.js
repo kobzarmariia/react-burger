@@ -9,26 +9,20 @@ import {
 	FETCH_ORDERS_START,
 } from './actionTypes';
 
-export const purchaseBurgerSuccess = (id, orderData) => {
-	return {
-		type: PURCHASE_BURGER_SUCCESS,
-		orderId: id,
-		orderData: orderData,
-	};
-};
+export const purchaseBurgerSuccess = (id, orderData) => ({
+	type: PURCHASE_BURGER_SUCCESS,
+	orderId: id,
+	orderData: orderData,
+});
 
-export const purchaseBurgerFail = error => {
-	return {
-		type: PURCHASE_BURGER_FAIL,
-		error: error,
-	};
-};
+export const purchaseBurgerFail = error => ({
+	type: PURCHASE_BURGER_FAIL,
+	error: error,
+});
 
-export const purchaseBurgerStart = () => {
-	return {
-		type: PURCHASE_BURGER_START,
-	};
-};
+export const purchaseBurgerStart = () => ({
+	type: PURCHASE_BURGER_START,
+});
 
 export const purchaseBurger = (orderData, token) => {
 	return async dispatch => {
@@ -42,31 +36,23 @@ export const purchaseBurger = (orderData, token) => {
 	};
 };
 
-export const purchaseInit = () => {
-	return {
-		type: PURCHASE_INIT,
-	};
-};
+export const purchaseInit = () => ({
+	type: PURCHASE_INIT,
+});
 
-export const fetchOrdersSuccess = orders => {
-	return {
-		type: FETCH_ORDERS_SUCCESS,
-		orders: orders,
-	};
-};
+export const fetchOrdersSuccess = orders => ({
+	type: FETCH_ORDERS_SUCCESS,
+	orders: orders,
+});
 
-export const fetchOrdersFail = error => {
-	return {
-		type: FETCH_ORDERS_FAIL,
-		error: error,
-	};
-};
+export const fetchOrdersFail = error => ({
+	type: FETCH_ORDERS_FAIL,
+	error: error,
+});
 
-export const fetchOrdersStart = () => {
-	return {
-		type: FETCH_ORDERS_START,
-	};
-};
+export const fetchOrdersStart = () => ({
+	type: FETCH_ORDERS_START,
+});
 
 export const fetchOrders = (token, userId) => {
 	return async dispatch => {

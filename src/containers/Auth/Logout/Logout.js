@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 
 import * as actions from '../actions';
 
-const Logout = props => {
+const Logout = ({ onLogout }) => {
 	useEffect(() => {
-		props.onLogout();
+		onLogout();
 		// eslint-disable-next-line
 	}, []);
 

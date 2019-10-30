@@ -7,26 +7,20 @@ import {
 } from './actionTypes';
 import axios from 'axios';
 
-export const authStart = () => {
-	return {
-		type: AUTH_START,
-	};
-};
+export const authStart = () => ({
+	type: AUTH_START,
+});
 
-export const authSuccess = (token, userId) => {
-	return {
-		type: AUTH_SUCCESS,
-		idToken: token,
-		userId: userId,
-	};
-};
+export const authSuccess = (token, userId) => ({
+	type: AUTH_SUCCESS,
+	idToken: token,
+	userId: userId,
+});
 
-export const authFail = error => {
-	return {
-		type: AUTH_FAIL,
-		error: error,
-	};
-};
+export const authFail = error => ({
+	type: AUTH_FAIL,
+	error: error,
+});
 
 export const logout = () => {
 	localStorage.removeItem('token');
@@ -73,12 +67,10 @@ export const auth = (email, password, isSignup) => {
 	};
 };
 
-export const setAuthRedirectPath = path => {
-	return {
-		type: SET_AUTH_REDIRECT_PATH,
-		path: path,
-	};
-};
+export const setAuthRedirectPath = path => ({
+	type: SET_AUTH_REDIRECT_PATH,
+	path: path,
+});
 
 export const authCheckState = () => {
 	return dispatch => {

@@ -5,7 +5,7 @@ import './Layout.css';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 
-const Layout = props => {
+const Layout = ({ isAuthenticated, children }) => {
 	const [sideDrawerIsVisible, setSideDrawerIsVisible] = useState(false);
 
 	const sideDrawerClosedHandler = () => {
@@ -18,19 +18,19 @@ const Layout = props => {
 
 	return (
 		<>
-			<Toolbar isAuth={props.isAuthenticated} drawerToggleClicked={sideDrawerToggleHandler} />
+			<Toolbar isAuth={isAuthenticated} drawerToggleClicked={sideDrawerToggleHandler} />
 			<SideDrawer
-				isAuth={props.isAuthenticated}
+				isAuth={isAuthenticated}
 				open={sideDrawerIsVisible}
 				closed={sideDrawerClosedHandler}
 			/>
-			<main className="content">{props.children}</main>
+			<main className="content">{children}</main>
 		</>
 	);
 };
 
-const mapStateToProps = state => ({
-	isAuthenticated: state.auth.token !== null,
+const mapStateToProps = ({ auth }) => ({
+	isAuthenticated: auth.token !== null,
 });
 
 export default connect(mapStateToProps)(Layout);
