@@ -9,7 +9,15 @@ import './Auth.css';
 import { auth, setAuthRedirectPath } from './actions';
 import { checkValidity } from '../../shared/utitlity';
 
-const Auth = props => {
+const Auth = ({
+	isAuthenticated,
+	buildingBurger,
+	authRedirectPath,
+	onSetAuthRedirectPath,
+	onAuth,
+	loading,
+	error,
+}) => {
 	const [isSignup, setIsSignup] = useState(true);
 	const [authForm, setAuthForm] = useState({
 		email: {
@@ -43,8 +51,8 @@ const Auth = props => {
 	});
 
 	useEffect(() => {
-		if (!props.buildingBurger && props.authRedirectPath !== '/') {
-			props.onSetAuthRedirectPath();
+		if (!buildingBurger && authRedirectPath !== '/') {
+			onSetAuthRedirectPath();
 		}
 		// eslint-disable-next-line
 	}, []);
@@ -64,7 +72,7 @@ const Auth = props => {
 
 	const submitHandler = event => {
 		event.preventDefault();
-		props.onAuth(authForm.email.value, authForm.password.value, isSignup);
+		onAuth(authForm.email.value, authForm.password.value, isSignup);
 	};
 
 	const switchAuthModeHandler = () => {
@@ -92,19 +100,19 @@ const Auth = props => {
 		/>
 	));
 
-	if (props.loading) {
+	if (loading) {
 		form = <Spinner />;
 	}
 
 	let errorMessage = null;
 
-	if (props.error) {
-		errorMessage = <p>{props.error.message}</p>;
+	if (error) {
+		errorMessage = <p>{error.message}</p>;
 	}
 
 	let authRedirect = null;
-	if (props.isAuthenticated) {
-		authRedirect = <Redirect to={props.authRedirectPath} />;
+	if (isAuthenticated) {
+		authRedirect = <Redirect to={authRedirectPath} />;
 	}
 
 	return (
@@ -122,22 +130,18 @@ const Auth = props => {
 	);
 };
 
-const mapStateToProps = state => {
-	return {
-		loading: state.auth.loading,
-		error: state.auth.error,
-		isAuthenticated: state.auth.token !== null,
-		buildingBurger: state.burgerBuilder.building,
-		authRedirectPath: state.auth.authRedirectPath,
-	};
-};
+const mapStateToProps = ({ auth, burgerBuilder }) => ({
+	loading: auth.loading,
+	error: auth.error,
+	isAuthenticated: auth.token !== null,
+	buildingBurger: burgerBuilder.building,
+	authRedirectPath: auth.authRedirectPath,
+});
 
-const mapDispatchToProps = dispatch => {
-	return {
-		onAuth: (email, password, isSignup) => dispatch(auth(email, password, isSignup)),
-		onSetAuthRedirectPath: () => dispatch(setAuthRedirectPath('/')),
-	};
-};
+const mapDispatchToProps = dispatch => ({
+	onAuth: (email, password, isSignup) => dispatch(auth(email, password, isSignup)),
+	onSetAuthRedirectPath: () => dispatch(setAuthRedirectPath('/')),
+});
 
 export default connect(
 	mapStateToProps,

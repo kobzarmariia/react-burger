@@ -19,9 +19,9 @@ const Orders = React.lazy(() => {
 	return import('./containers/Orders/Orders');
 });
 
-const App = props => {
+const App = ({ onTryAutoSignUp, isAuthenticated }) => {
 	useEffect(() => {
-		props.onTryAutoSignUp();
+		onTryAutoSignUp();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -33,7 +33,7 @@ const App = props => {
 		</Switch>
 	);
 
-	if (props.isAuthenticated) {
+	if (isAuthenticated) {
 		routes = (
 			<Switch>
 				<Route path="/" exact component={BurgerBuilder} />
@@ -55,17 +55,13 @@ const App = props => {
 	);
 };
 
-const mapStateToProps = state => {
-	return {
-		isAuthenticated: state.auth.token !== null,
-	};
-};
+const mapStateToProps = ({ auth }) => ({
+	isAuthenticated: auth.token !== null,
+});
 
-const mapDispatchToProps = dispatch => {
-	return {
-		onTryAutoSignUp: () => dispatch(authCheckState()),
-	};
-};
+const mapDispatchToProps = dispatch => ({
+	onTryAutoSignUp: () => dispatch(authCheckState()),
+});
 
 export default withRouter(
 	connect(

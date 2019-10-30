@@ -2,17 +2,17 @@ import React from 'react';
 
 import './Order.css';
 
-const order = props => {
-	const ingredients = [];
+const order = ({ price, ingredients }) => {
+	const ingredientsArray = [];
 
-	for (let ingredientName in props.ingredients) {
-		ingredients.push({
+	for (let ingredientName in ingredients) {
+		ingredientsArray.push({
 			name: ingredientName,
-			amount: props.ingredients[ingredientName],
+			amount: ingredients[ingredientName],
 		});
 	}
 
-	const ingredientOutput = ingredients.map(ig => {
+	const ingredientOutput = ingredientsArray.map(ig => {
 		return (
 			<span
 				style={{
@@ -33,7 +33,7 @@ const order = props => {
 		<div className="Order">
 			<p>Ingredients: {ingredientOutput}</p>
 			<p>
-				Price: <strong>USD {Number.parseFloat(props.price).toFixed(2)}</strong>
+				Price: <strong>USD {Number.parseFloat(price).toFixed(2)}</strong>
 			</p>
 		</div>
 	);

@@ -2,11 +2,11 @@ import React from 'react';
 
 import Button from '../../UI/Button/Button';
 
-const OrderSummary = props => {
-	const ingredientSummary = Object.keys(props.ingredients).map(igKey => {
+const OrderSummary = ({ ingredients, purchaseCancelled, purchaseContinued, price }) => {
+	const ingredientSummary = Object.keys(ingredients).map(igKey => {
 		return (
 			<li key={igKey}>
-				<span style={{ textTransform: 'capitalize' }}>{igKey}</span>: {props.ingredients[igKey]}
+				<span style={{ textTransform: 'capitalize' }}>{igKey}</span>: {ingredients[igKey]}
 			</li>
 		);
 	});
@@ -17,13 +17,13 @@ const OrderSummary = props => {
 			<p>A delicious burger with the following ingredients:</p>
 			<ul>{ingredientSummary}</ul>
 			<p>
-				<strong>Total Price: {props.price.toFixed(2)}</strong>
+				<strong>Total Price: {price.toFixed(2)}</strong>
 			</p>
 			<p>Continue to Checkout?</p>
-			<Button btnType="Danger" clicked={props.purchaseCancelled}>
+			<Button btnType="Danger" clicked={purchaseCancelled}>
 				CANCEL
 			</Button>
-			<Button btnType="Success" clicked={props.purchaseContinued}>
+			<Button btnType="Success" clicked={purchaseContinued}>
 				CONTINUE
 			</Button>
 		</>

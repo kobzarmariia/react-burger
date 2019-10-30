@@ -11,7 +11,7 @@ import { purchaseBurger } from '../../Orders/actions';
 
 import { checkValidity } from '../../../shared/utitlity';
 
-const ContactData = props => {
+const ContactData = ({ onOrderBurger, ings, token, userId, price, loading }) => {
 	const [formIsValid, setFormIsValid] = useState(false);
 	const [orderForm, setOrderForm] = useState({
 		name: {
@@ -104,13 +104,13 @@ const ContactData = props => {
 			formData[formElementIdentifier] = orderForm[formElementIdentifier].value;
 		}
 		const order = {
-			ingredients: props.ings,
-			price: props.price,
+			ingredients: ings,
+			price: price,
 			orderData: formData,
-			userId: props.userId,
+			userId: userId,
 		};
 
-		props.onOrderBurger(order, props.token);
+		onOrderBurger(order, token);
 	};
 
 	const inputChangedHandler = (event, inputIdentifier) => {
@@ -162,7 +162,7 @@ const ContactData = props => {
 			</Button>
 		</form>
 	);
-	if (props.loading) {
+	if (loading) {
 		form = <Spinner />;
 	}
 	return (
@@ -173,13 +173,13 @@ const ContactData = props => {
 	);
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ burgerBuilder, order, auth }) => {
 	return {
-		ings: state.burgerBuilder.ingredients,
-		price: state.burgerBuilder.totalPrice,
-		loading: state.order.loading,
-		token: state.auth.token,
-		userId: state.auth.userId,
+		ings: burgerBuilder.ingredients,
+		price: burgerBuilder.totalPrice,
+		loading: order.loading,
+		token: auth.token,
+		userId: auth.userId,
 	};
 };
 

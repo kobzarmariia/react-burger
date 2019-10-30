@@ -6,12 +6,12 @@ import Logo from '../../Logo/Logo';
 import NavigationItems from '../NavigationItems/NavigationItems';
 import DrawerToggle from '../SideDrawer/DrawerToggle/DrawerToggle';
 
-const toolbar = props => (
+const toolbar = ({ drawerToggleClicked, isAuth }) => (
 	<header className="Toolbar">
-		<DrawerToggle clicked={props.drawerToggleClicked} />
+		<DrawerToggle clicked={drawerToggleClicked} />
 		<Logo height="80%" />
 		<nav className="DesktopOnly">
-			<NavigationItems isAuthenticated={props.isAuth} />
+			<NavigationItems isAuthenticated={isAuth} />
 		</nav>
 	</header>
 );

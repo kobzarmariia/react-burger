@@ -4,20 +4,18 @@ import { connect } from 'react-redux';
 
 import * as actions from '../actions';
 
-const Logout = props => {
+const Logout = ({ onLogout }) => {
 	useEffect(() => {
-		props.onLogout();
+		onLogout();
 		// eslint-disable-next-line
 	}, []);
 
 	return <Redirect to="/" />;
 };
 
-const mapDispatchToProps = dispatch => {
-	return {
-		onLogout: () => dispatch(actions.logout()),
-	};
-};
+const mapDispatchToProps = dispatch => ({
+	onLogout: () => dispatch(actions.logout()),
+});
 
 export default connect(
 	null,
